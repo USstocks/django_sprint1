@@ -1,9 +1,7 @@
+from django.http import HttpResponseNotFound
 from django.shortcuts import render
 
-# Create your views here.
-from django.shortcuts import render, redirect
-
-posts = [
+posts:list[str] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -48,22 +46,18 @@ posts = [
 
 
 def index(request):
-    template = 'blog/index.html'
     context = {'posts': reversed(posts)}
-    return render(request, template, context)
+    return render(request, 'blog/index.html', context)
 
 
-def post_detail(request, id):
+def post_detail(request, post_id):
     try:
-        context = {'post': posts[id]}
+        context = {'post': posts[post_id]}
     except IndexError:
-        return redirect('blog:index')
-
-    template = 'blog/detail.html'
-    return render(request, template, context)
+        raise HttpResponseNotFound('<h1>Page not found</h1>')
+    return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug):
-    template = 'blog/category.html'
     context = {'category_slug': category_slug}
-    return render(request, template, context)
+    return render(request, 'blog/category.html', context)
