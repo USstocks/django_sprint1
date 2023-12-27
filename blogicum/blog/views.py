@@ -1,7 +1,7 @@
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
 
-posts:list[str] = [
+posts: list[str] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
