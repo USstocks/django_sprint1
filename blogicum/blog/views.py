@@ -1,6 +1,6 @@
 from typing import Union
 
-from django.http import HttpResponseNotFound, Http404
+from django.http import Http404
 from django.shortcuts import render
 
 posts: list[dict[Union[str, any]]] = [
@@ -50,11 +50,14 @@ posts: list[dict[Union[str, any]]] = [
 def index(request):
     return render(request, 'blog/index.html', {'posts': posts})
 
+
 def post_detail(request, pk):
     try:
         return render(request, 'blog/detail.html', {'post': posts[pk]})
     except KeyError:
         raise Http404('<h1>Page not found. Error 404</h1>')
 
+
 def category_posts(request, category_slug):
-    return render(request, 'blog/category.html', {'category_slug': category_slug})
+    return render(request, 'blog/category.html', 
+                  {'category_slug': category_slug})
