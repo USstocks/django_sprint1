@@ -46,6 +46,7 @@ posts: list[dict[Union[str, int]]] = [
     },
 ]
 
+
 def index(request):
     return render(request, 'blog/index.html', {'posts': posts})
 
