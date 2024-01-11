@@ -3,7 +3,7 @@ from typing import Union
 from django.http import Http404
 from django.shortcuts import render
 
-posts: list[dict[Union[str, any]]] = [
+posts: list[dict[Union[str, int]]] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -46,14 +46,13 @@ posts: list[dict[Union[str, any]]] = [
     },
 ]
 
-
 def index(request):
     return render(request, 'blog/index.html', {'posts': posts})
 
 
-def post_detail(request, pk):
+def post_detail(request, post_pk):
     try:
-        return render(request, 'blog/detail.html', {'post': posts[pk]})
+        return render(request, 'blog/detail.html', {'post': posts[post_pk]})
     except KeyError:
         raise Http404('<h1>Page not found. Error 404</h1>')
 
