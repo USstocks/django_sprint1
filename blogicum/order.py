@@ -1,8 +1,5 @@
 from typing import Union
 
-from django.http import Http404
-from django.shortcuts import render
-
 posts: list[dict[Union[str, int]]] = [
     {
         'id': 0,
@@ -46,23 +43,10 @@ posts: list[dict[Union[str, int]]] = [
     },
 ]
 
+
 def generate_dict(data):
     for item in data:
         yield {item['id']: {k: v for k, v in item.items()}}
 
 posts = {k: v for d in generate_dict(posts) for k, v in d.items()}
-
-def index(request):
-    return render(request, 'blog/index.html', {'posts': posts})
-
-
-def post_detail(request, post_pk):
-    try:
-        return render(request, 'blog/detail.html', {'post': posts[post_pk]})
-    except KeyError:
-        raise Http404('<h1>Page not found. Error 404</h1>')
-
-
-def category_posts(request, category_slug):
-    return render(request, 'blog/category.html',
-                  {'category_slug': category_slug})
+print(posts)
