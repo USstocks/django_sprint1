@@ -44,9 +44,12 @@ posts: list[dict[Union[str, int]]] = [
 ]
 
 
-def generate_dict(data):
-    for item in data:
-        yield {item['id']: {k: v for k, v in item.items()}}
 
-posts = {k: v for d in generate_dict(posts) for k, v in d.items()}
+def generate_dict(data):
+    return {item['id']: item for item in data}
+posts = generate_dict(posts)
 print(posts)
+
+
+
+
