@@ -46,8 +46,11 @@ posts: list[dict[Union[str, int]]] = [
     },
 ]
 
+
 def generate_dict(data):
     return {item['id']: item for item in data}
+
+
 new_posts = generate_dict(posts)
 
 
@@ -57,7 +60,8 @@ def index(request):
 
 def post_detail(request, post_id):
     try:
-        return render(request, 'blog/detail.html', {'post': new_posts[post_id]})
+        return render(request, 'blog/detail.html',
+                       {'post': new_posts[post_id]})
     except KeyError:
         raise Http404('<h1>Page not found. Error 404</h1>')
 
