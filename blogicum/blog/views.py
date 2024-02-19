@@ -60,7 +60,7 @@ def index(request):
 
 def post_detail(request, post_id):
     try:
-        return render(request,
+        return render(request, 
                       'blog/detail.html', {'post': new_posts[post_id]})
     except KeyError:
         raise Http404('<h1>Page not found. Error 404</h1>')
